@@ -276,7 +276,7 @@ gsap.utils.toArray(".upcoming-card").forEach((card, i) => {
 // Animated Download Button Functionality
 document.addEventListener("DOMContentLoaded", function () {
   const downloadInput = document.querySelector(
-    ".download-label .download-input"
+    ".download-label .download-input",
   );
   const downloadLink = document.querySelector("a[download]");
 
@@ -347,7 +347,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const repeatedWords = Object.entries(wordCounts).filter(
-      ([word, count]) => count > 2
+      ([word, count]) => count > 2,
     );
     if (repeatedWords.length > 0) {
       errors.push("Message contains too many repeated words");
@@ -392,7 +392,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 8. Check for all caps (shouting)
     const upperCaseWords = words.filter(
-      (word) => word === word.toUpperCase() && word.length > 2
+      (word) => word === word.toUpperCase() && word.length > 2,
     );
     if (upperCaseWords.length > words.length * 0.5) {
       errors.push("Please avoid typing in all capital letters");
@@ -465,7 +465,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const existingError =
         this.parentElement.querySelector(".validation-error");
       const existingSuccess = this.parentElement.querySelector(
-        ".validation-success"
+        ".validation-success",
       );
       if (existingError) existingError.remove();
       if (existingSuccess) existingSuccess.remove();
@@ -492,9 +492,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!validation.isValid) {
         showMessage(
           `Please fix the following issues:<br>${validation.errors.join(
-            "<br>"
+            "<br>",
           )}`,
-          "error"
+          "error",
         );
         // Reset button state
         submitBtn.disabled = false;
@@ -524,7 +524,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (response.ok) {
           showMessage(
             "Thank you! Your message has been sent successfully. I'll get back to you soon!",
-            "success"
+            "success",
           );
           contactForm.reset();
         } else {
@@ -535,7 +535,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Fallback: Send email directly (this will open user's email client)
         const emailSubject = encodeURIComponent(
-          `Portfolio Contact: ${data.subject}`
+          `Portfolio Contact: ${data.subject}`,
         );
         const emailBody = encodeURIComponent(`
 Name: ${data.firstName} ${data.lastName}
@@ -550,7 +550,7 @@ ${data.message}
 
         showMessage(
           `Form submission failed. <a href="${mailtoLink}" class="underline">Click here to send email directly</a> or try again later.`,
-          "error"
+          "error",
         );
       } finally {
         // Reset button state
@@ -599,7 +599,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Preload critical images
   const criticalImages = [
-    "./assets/profile.jpg",
+    "./assets/profile.png",
     // "./assets/cursor.png",
   ];
 
@@ -682,7 +682,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Calculate total stars
         const totalStars = reposData.reduce(
           (sum, repo) => sum + repo.stargazers_count,
-          0
+          0,
         );
         document.getElementById("githubStars").textContent = totalStars;
 
@@ -693,7 +693,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const commitsResponse = await fetch(
           `https://api.github.com/search/commits?q=author:${username}+committer-date:>${
             thirtyDaysAgo.toISOString().split("T")[0]
-          }`
+          }`,
         );
         if (commitsResponse.ok) {
           const commitsData = await commitsResponse.json();
