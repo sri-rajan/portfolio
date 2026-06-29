@@ -154,15 +154,276 @@
         box-shadow: 0 0 40px rgba(200, 160, 80, 0.25);
       }
 
+      /* ─── RESPONSIVE ─── */
       @media (max-width: 900px) {
+        nav {
+          padding: 1.25rem 1.5rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-cta {
+          font-size: 0.7rem;
+          padding: 0.4rem 0.9rem;
+        }
+
+        /* Hero */
+        .hero {
+          padding: 8rem 1.5rem 3rem;
+          min-height: auto;
+          justify-content: flex-start;
+        }
         .hero-layout {
           flex-direction: column-reverse;
+          align-items: center;
+          gap: 2rem;
+          text-align: center;
+        }
+        .hero-content {
+          max-width: 100%;
+        }
+        .hero-image img {
+          margin-top: 24px;
+          width: 180px;
+          height: 180px;
+        }
+        .hero h1 {
+          font-size: clamp(3rem, 12vw, 5rem);
+        }
+        .hero-subtitle {
+          max-width: 100%;
+          margin-top: 1.25rem;
+        }
+        .hero-meta {
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+        }
+        .hero-divider {
+          width: 40px;
+          height: 1px;
+        }
+        .hero-cta-group {
+          justify-content: center;
+        }
+
+        /* Stats bar */
+        .stats-bar {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 2rem 1.5rem;
+          gap: 1.5rem;
+        }
+        .stat-item {
+          border-right: none;
+          border-bottom: 1px solid var(--border);
+          padding-right: 0;
+          padding-bottom: 1.25rem;
+        }
+        .stat-item:nth-child(odd) {
+          border-right: 1px solid var(--border);
+          padding-right: 1rem;
+        }
+        .stat-item:nth-last-child(-n + 2) {
+          border-bottom: none;
+          padding-bottom: 0;
+        }
+
+        /* Sections */
+        section {
+          padding: 3.5rem 1.5rem;
+        }
+
+        /* About */
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+
+        /* Experience */
+        .exp-item {
+          grid-template-columns: 1fr;
+          gap: 0.5rem;
+        }
+        .exp-meta {
+          padding-top: 0;
+          flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 0.5rem;
+        }
+        .exp-company {
+          font-size: 1.2rem;
+          width: 100%;
+        }
+        .exp-role-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.25rem;
+        }
+
+        /* Skills */
+        .skills-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Education */
+        .edu-certs-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        /* Contact */
+        .contact-section {
+          padding: 4rem 1.5rem;
+        }
+        .contact-links {
+          flex-direction: column;
+          align-items: center;
+          gap: 0.875rem;
+          margin-bottom: 2.5rem;
+        }
+        .contact-link {
+          width: 100%;
+          max-width: 280px;
+          justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+          padding: 1.5rem;
+          flex-direction: column;
+          gap: 0.5rem;
           text-align: center;
         }
 
+        /* Sep */
+        .section-sep {
+          margin: 0 1.5rem;
+        }
+
+        /* Section title */
+        .section-title {
+          font-size: clamp(1.75rem, 6vw, 2.5rem);
+        }
+      }
+
+      @media (max-width: 600px) {
+        /* Nav */
+        .nav-cta {
+          display: none;
+        }
+        nav {
+          padding: 1rem 1.25rem;
+        }
+
+        /* Hero */
+        .hero {
+          padding: 8rem 1.5rem 3rem;
+          min-height: auto;
+          justify-content: flex-start;
+        }
+        .hero-layout {
+          flex-direction: column-reverse;
+          align-items: center;
+          gap: 2rem;
+          text-align: center;
+        }
+        .hero h1 {
+          font-size: clamp(2.75rem, 14vw, 4rem);
+          line-height: 1;
+        }
         .hero-image img {
-          width: 220px;
-          height: 220px;
+          margin-top: 100px;
+          width: 140px;
+          height: 140px;
+        }
+        .hero-badge {
+          margin-bottom: 1.5rem;
+          font-size: 0.65rem;
+        }
+        .hero-meta {
+          gap: 0.875rem;
+        }
+        .hero-meta-value {
+          font-size: 0.82rem;
+        }
+        .btn-primary,
+        .btn-secondary {
+          padding: 0.75rem 1.5rem;
+          font-size: 0.72rem;
+          width: 100%;
+          text-align: center;
+        }
+        .hero-cta-group {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        /* Stats */
+        .stats-bar {
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+        }
+        .stat-number {
+          font-size: 2rem;
+        }
+
+        /* Sections */
+        section {
+          padding: 3rem 1.25rem;
+        }
+
+        /* About highlights */
+        .highlight-card strong {
+          font-size: 1.6rem;
+        }
+
+        /* Experience */
+        .exp-achievements li {
+          font-size: 0.83rem;
+        }
+
+        /* Skills */
+        .skill-tags {
+          gap: 0.4rem;
+        }
+
+        /* Testimonials */
+        .testimonial-card {
+          padding: 1.5rem;
+        }
+        .testimonial-text {
+          font-size: 0.85rem;
+        }
+
+        /* Education certs */
+        .cert-item {
+          flex-wrap: wrap;
+          gap: 0.5rem;
+        }
+        .cert-name {
+          font-size: 0.78rem;
+        }
+
+        /* Contact */
+        .contact-title {
+          font-size: clamp(1.75rem, 8vw, 2.5rem);
+        }
+
+        /* Footer */
+        .footer-copy:last-child {
+          display: none;
+        }
+
+        /* Section sep */
+        .section-sep {
+          margin: 0 1.25rem;
         }
       }
 
@@ -1568,7 +1829,7 @@
           </svg>
           LinkedIn Profile
         </a>
-        <a href="mailto:srirajan@example.com" class="contact-link">
+        <a href="mailto:srirajanb781@gmail.com" class="contact-link">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
@@ -1577,7 +1838,7 @@
           Send Email
         </a>
         <a
-          href="https://www.linkedin.com/in/sri-rajan-bb1442215/"
+          href="https://github.com/sri-rajan"
           target="_blank"
           class="contact-link"
         >
@@ -1588,6 +1849,16 @@
           </svg>
           GitHub
         </a>
+        <a href="https://wa.me/9025037108" target="_blank" class="contact-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M20.52 3.48A11.86 11.86 0 0 0 12.04 0C5.4 0 .02 5.38.02 12c0 2.12.55 4.18 1.6 6L0 24l6.17-1.62A11.95 11.95 0 0 0 12.04 24c6.62 0 12-5.38 12-12 0-3.2-1.25-6.22-3.52-8.52ZM12.04 21.8a9.8 9.8 0 0 1-5-1.37l-.36-.21-3.66.96.98-3.56-.24-.37A9.74 9.74 0 1 1 12.04 21.8Zm5.39-7.34c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.95 1.17-.17.2-.35.22-.65.07-.3-.15-1.27-.47-2.42-1.5-.9-.8-1.5-1.8-1.68-2.1-.18-.3-.02-.46.13-.6.14-.14.3-.35.45-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.08-.8.37-.27.3-1.04 1.01-1.04 2.47s1.06 2.88 1.2 3.08c.15.2 2.08 3.18 5.05 4.46.7.3 1.25.48 1.68.61.71.23 1.35.2 1.86.12.57-.09 1.77-.72 2.02-1.41.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35Z"
+            />
+          </svg>
+          Whatsapp
+        </a>
+        <a class="contact-link"> srirajan781@gmail.com</a>
+        <a class="contact-link"> 9025037108</a>
       </div>
       <a
         href="https://www.linkedin.com/in/sri-rajan-bb1442215/"
