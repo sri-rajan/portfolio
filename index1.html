@@ -1,0 +1,1641 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sri Rajan — Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0b;
+        --bg-card: #111113;
+        --bg-card-2: #161618;
+        --border: rgba(255, 255, 255, 0.07);
+        --border-accent: rgba(200, 160, 80, 0.3);
+        --gold: #c8a050;
+        --gold-light: #e8c878;
+        --gold-dim: rgba(200, 160, 80, 0.15);
+        --text-primary: #f0ece4;
+        --text-secondary: #9b9490;
+        --text-muted: #5a5754;
+        --accent-glow: rgba(200, 160, 80, 0.08);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "DM Sans", sans-serif;
+        background: var(--bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* ─── Noise overlay ─── */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.4;
+      }
+
+      /* ─── NAV ─── */
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        padding: 1.25rem 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--border);
+        background: rgba(10, 10, 11, 0.85);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+      }
+
+      .nav-logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.25rem;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      .nav-logo span {
+        color: var(--gold);
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .nav-links a {
+        font-size: 0.8rem;
+        font-weight: 400;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .nav-links a:hover {
+        color: var(--gold-light);
+      }
+
+      .nav-cta {
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        text-decoration: none;
+        border: 1px solid var(--border-accent);
+        padding: 0.5rem 1.25rem;
+        transition: all 0.2s;
+      }
+
+      .nav-cta:hover {
+        background: var(--gold-dim);
+        color: var(--gold-light);
+      }
+
+      /* ─── HERO ─── */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 0 4rem 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4rem;
+      }
+
+      .hero-image {
+        flex-shrink: 0;
+      }
+
+      .hero-image img {
+        width: 350px;
+        height: 350px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid var(--gold);
+        box-shadow: 0 0 40px rgba(200, 160, 80, 0.25);
+      }
+
+      @media (max-width: 900px) {
+        .hero-layout {
+          flex-direction: column-reverse;
+          text-align: center;
+        }
+
+        .hero-image img {
+          width: 220px;
+          height: 220px;
+        }
+      }
+
+      .hero-bg-line {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          linear-gradient(180deg, transparent 60%, rgba(10, 10, 11, 0.95) 100%),
+          radial-gradient(
+            ellipse 80% 60% at 70% 30%,
+            rgba(200, 160, 80, 0.04) 0%,
+            transparent 70%
+          );
+        z-index: 0;
+      }
+
+      /* Decorative grid lines */
+      .hero::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+          linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.015) 1px,
+            transparent 1px
+          );
+        background-size: 80px 80px;
+        z-index: 0;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 900px;
+      }
+
+      .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        border: 1px solid var(--border-accent);
+        padding: 0.35rem 0.9rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .hero-badge::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold);
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.4;
+          transform: scale(0.8);
+        }
+      }
+
+      .hero h1 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3.5rem, 8vw, 7.5rem);
+        font-weight: 300;
+        line-height: 0.95;
+        letter-spacing: -0.01em;
+        color: var(--text-primary);
+        margin-bottom: 0.15em;
+      }
+
+      .hero h1 em {
+        font-style: italic;
+        color: var(--gold);
+        font-weight: 300;
+      }
+
+      .hero-subtitle {
+        font-family: "DM Sans", sans-serif;
+        font-size: clamp(0.85rem, 1.5vw, 1rem);
+        font-weight: 300;
+        color: var(--text-secondary);
+        max-width: 540px;
+        margin-top: 2rem;
+        line-height: 1.75;
+      }
+
+      .hero-meta {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-meta-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+      }
+
+      .hero-meta-label {
+        font-size: 0.68rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      .hero-meta-value {
+        font-size: 0.9rem;
+        font-weight: 400;
+        color: var(--text-primary);
+      }
+
+      .hero-divider {
+        width: 1px;
+        height: 40px;
+        background: var(--border);
+      }
+
+      .hero-cta-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .btn-primary {
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #0a0a0b;
+        background: var(--gold);
+        padding: 0.85rem 2rem;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+
+      .btn-primary:hover {
+        background: var(--gold-light);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        display: inline-block;
+        font-size: 0.78rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--text-primary);
+        border: 1px solid var(--border);
+        padding: 0.85rem 2rem;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--border-accent);
+        color: var(--gold-light);
+        transform: translateY(-1px);
+      }
+
+      /* ─── STATS BAR ─── */
+      .stats-bar {
+        background: var(--bg-card);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 2.5rem 4rem;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        border-right: 1px solid var(--border);
+        padding-right: 2rem;
+      }
+
+      .stat-item:last-child {
+        border-right: none;
+      }
+
+      .stat-number {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.75rem;
+        font-weight: 500;
+        color: var(--gold);
+        line-height: 1;
+      }
+
+      .stat-label {
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+      }
+
+      /* ─── SECTION BASE ─── */
+      section {
+        padding: 6rem 4rem;
+        position: relative;
+      }
+
+      .section-label {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.68rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 3rem;
+      }
+
+      .section-label::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+        max-width: 60px;
+      }
+
+      .section-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-weight: 300;
+        line-height: 1.05;
+        color: var(--text-primary);
+        margin-bottom: 1.25rem;
+      }
+
+      .section-title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+
+      /* ─── ABOUT ─── */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 5rem;
+        align-items: start;
+        margin-top: 3rem;
+      }
+
+      .about-text {
+        font-size: 1rem;
+        font-weight: 300;
+        color: var(--text-secondary);
+        line-height: 1.85;
+      }
+
+      .about-text p + p {
+        margin-top: 1.25rem;
+      }
+
+      .about-highlights {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .highlight-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-left: 3px solid var(--gold);
+        padding: 1.25rem 1.5rem;
+      }
+
+      .highlight-card strong {
+        display: block;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--gold);
+        line-height: 1;
+      }
+
+      .highlight-card span {
+        font-size: 0.78rem;
+        font-weight: 400;
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+        margin-top: 0.3rem;
+        display: block;
+      }
+
+      /* ─── EXPERIENCE ─── */
+      .experience-section {
+        background: var(--bg-card);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .experience-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+
+      .exp-item {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 3rem;
+        padding: 3rem 0;
+        border-bottom: 1px solid var(--border);
+        position: relative;
+      }
+
+      .exp-item:last-child {
+        border-bottom: none;
+      }
+
+      .exp-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-top: 0.25rem;
+      }
+
+      .exp-company {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .exp-period {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-top: 0.25rem;
+      }
+
+      .exp-location {
+        font-size: 0.78rem;
+        color: var(--text-muted);
+        margin-top: 0.15rem;
+      }
+
+      .exp-roles {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+      }
+
+      .exp-role {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .exp-role-header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .exp-role-title {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .exp-role-date {
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        white-space: nowrap;
+      }
+
+      .exp-achievements {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .exp-achievements li {
+        font-size: 0.88rem;
+        font-weight: 300;
+        color: var(--text-secondary);
+        padding-left: 1.25rem;
+        position: relative;
+        line-height: 1.65;
+      }
+
+      .exp-achievements li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.58em;
+        width: 5px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      .exp-achievements li strong {
+        color: var(--gold-light);
+        font-weight: 500;
+      }
+
+      /* ─── SKILLS ─── */
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .skill-category {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 1.75rem;
+        transition: border-color 0.3s;
+      }
+
+      .skill-category:hover {
+        border-color: var(--border-accent);
+      }
+
+      .skill-cat-title {
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 1.25rem;
+      }
+
+      .skill-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .skill-tag {
+        font-family: "DM Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--text-secondary);
+        background: var(--bg-card-2);
+        border: 1px solid var(--border);
+        padding: 0.3rem 0.65rem;
+        transition: all 0.2s;
+      }
+
+      .skill-tag:hover {
+        border-color: var(--border-accent);
+        color: var(--gold-light);
+      }
+
+      /* ─── TESTIMONIALS ─── */
+      .testimonials-section {
+        background: var(--bg-card);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .testimonials-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+        margin-top: 3rem;
+      }
+
+      .testimonial-card {
+        border: 1px solid var(--border);
+        padding: 2.25rem;
+        position: relative;
+        background: var(--bg);
+      }
+
+      .testimonial-card::before {
+        content: "\201C";
+        font-family: "Cormorant Garamond", serif;
+        font-size: 6rem;
+        color: var(--gold);
+        opacity: 0.15;
+        position: absolute;
+        top: -1rem;
+        left: 1.75rem;
+        line-height: 1;
+      }
+
+      .testimonial-text {
+        font-size: 0.92rem;
+        font-weight: 300;
+        color: var(--text-secondary);
+        line-height: 1.8;
+        margin-bottom: 1.75rem;
+        font-style: italic;
+      }
+
+      .testimonial-author {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .testimonial-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      .testimonial-title {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        line-height: 1.4;
+      }
+
+      /* ─── EDUCATION + CERTS ─── */
+      .edu-certs-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        margin-top: 3rem;
+      }
+
+      .edu-item {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 1.75rem;
+      }
+
+      .edu-degree {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.4rem;
+        font-weight: 400;
+        color: var(--text-primary);
+        margin-bottom: 0.4rem;
+      }
+
+      .edu-school {
+        font-size: 0.85rem;
+        color: var(--text-secondary);
+      }
+
+      .edu-year {
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        color: var(--gold);
+        margin-top: 0.5rem;
+      }
+
+      .cert-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .cert-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.9rem 1rem;
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+      }
+
+      .cert-icon {
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--border-accent);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .cert-icon svg {
+        width: 14px;
+        height: 14px;
+        fill: var(--gold);
+      }
+
+      .cert-info {
+        flex: 1;
+      }
+
+      .cert-name {
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: var(--text-primary);
+      }
+
+      .cert-issuer {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        margin-top: 0.1rem;
+      }
+
+      .cert-year {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--gold);
+      }
+
+      /* ─── CONTACT / FOOTER ─── */
+      .contact-section {
+        text-align: center;
+        padding: 8rem 4rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .contact-section::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          ellipse 60% 50% at 50% 50%,
+          rgba(200, 160, 80, 0.05) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+
+      .contact-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2.5rem, 6vw, 5rem);
+        font-weight: 300;
+        line-height: 1.05;
+        margin-bottom: 1.5rem;
+      }
+
+      .contact-title em {
+        font-style: italic;
+        color: var(--gold);
+      }
+
+      .contact-tagline {
+        font-size: 0.9rem;
+        font-weight: 300;
+        color: var(--text-muted);
+        max-width: 420px;
+        margin: 0 auto 3rem;
+      }
+
+      .contact-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 5rem;
+      }
+
+      .contact-link {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.78rem;
+        font-weight: 400;
+        letter-spacing: 0.08em;
+        color: var(--text-secondary);
+        text-decoration: none;
+        padding: 0.65rem 1.25rem;
+        border: 1px solid var(--border);
+        transition: all 0.2s;
+      }
+
+      .contact-link:hover {
+        border-color: var(--border-accent);
+        color: var(--gold-light);
+      }
+
+      .contact-link svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+      }
+
+      footer {
+        border-top: 1px solid var(--border);
+        padding: 2rem 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .footer-copy {
+        font-size: 0.72rem;
+        color: var(--text-muted);
+        letter-spacing: 0.06em;
+      }
+
+      .footer-logo {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--text-muted);
+        letter-spacing: 0.04em;
+      }
+
+      .footer-logo span {
+        color: var(--gold);
+      }
+
+      /* ─── SCROLL ANIMATIONS ─── */
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        transition:
+          opacity 0.7s ease,
+          transform 0.7s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .reveal-delay-1 {
+        transition-delay: 0.1s;
+      }
+      .reveal-delay-2 {
+        transition-delay: 0.2s;
+      }
+      .reveal-delay-3 {
+        transition-delay: 0.3s;
+      }
+      .reveal-delay-4 {
+        transition-delay: 0.4s;
+      }
+
+      /* ─── CURRENT ROLE BADGE ─── */
+      .current-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-size: 0.65rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #4ade80;
+        background: rgba(74, 222, 128, 0.1);
+        border: 1px solid rgba(74, 222, 128, 0.2);
+        padding: 0.25rem 0.6rem;
+        margin-top: 0.5rem;
+        width: fit-content;
+      }
+
+      .current-badge::before {
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: #4ade80;
+        animation: pulse 2s infinite;
+      }
+
+      /* ─── SEPARATOR LINE ─── */
+      .section-sep {
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--border),
+          transparent
+        );
+        margin: 0 4rem;
+      }
+
+      /* ─── RESPONSIVE ─── */
+      @media (max-width: 900px) {
+        nav {
+          padding: 1.25rem 1.5rem;
+        }
+        .nav-links {
+          display: none;
+        }
+        section {
+          padding: 4rem 1.5rem;
+        }
+        .hero {
+          padding: 0 1.5rem 4rem;
+        }
+        .stats-bar {
+          grid-template-columns: repeat(2, 1fr);
+          padding: 2rem 1.5rem;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+          gap: 2.5rem;
+        }
+        .skills-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .testimonials-grid {
+          grid-template-columns: 1fr;
+        }
+        .exp-item {
+          grid-template-columns: 1fr;
+          gap: 0.75rem;
+        }
+        .edu-certs-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+        .contact-section {
+          padding: 5rem 1.5rem;
+        }
+        footer {
+          padding: 1.5rem;
+          flex-direction: column;
+          gap: 0.75rem;
+          text-align: center;
+        }
+        .section-sep {
+          margin: 0 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <a href="#" class="nav-logo">Sri <span>Rajan</span></a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a
+        href="https://www.linkedin.com/in/sri-rajan-bb1442215/"
+        target="_blank"
+        class="nav-cta"
+        >LinkedIn →</a
+      >
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="hero-bg-line"></div>
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-badge reveal">Available for opportunities</div>
+
+          <h1 class="reveal reveal-delay-1">Sri <em>Rajan</em></h1>
+
+          <p class="hero-subtitle reveal reveal-delay-2">
+            Software engineer specialising in high-performance backend systems,
+            microservices architecture, and scalable infrastructure. Building
+            systems that handle real volume — reliably, at speed.
+          </p>
+
+          <div class="hero-meta reveal reveal-delay-3">
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Current Role</span>
+              <span class="hero-meta-value"
+                >Full Stack Engineer · BrainSightAI</span
+              >
+            </div>
+
+            <div class="hero-divider"></div>
+
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Experience</span>
+              <span class="hero-meta-value">3+ Years Professional</span>
+            </div>
+
+            <div class="hero-divider"></div>
+
+            <div class="hero-meta-item">
+              <span class="hero-meta-label">Location</span>
+              <span class="hero-meta-value">Bengaluru, India</span>
+            </div>
+          </div>
+
+          <div class="hero-cta-group reveal reveal-delay-4">
+            <a href="#experience" class="btn-primary">View My Work</a>
+            <a href="#contact" class="btn-secondary">Get In Touch</a>
+          </div>
+        </div>
+
+        <div class="hero-image reveal">
+          <img src="./public/profile.png" alt="Sri Rajan" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat-item reveal">
+        <span class="stat-number">80%</span>
+        <span class="stat-label">API response time improved</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-1">
+        <span class="stat-number">100x</span>
+        <span class="stat-label">Workflow automation scale-up</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-2">
+        <span class="stat-number">$500K</span>
+        <span class="stat-label">Daily payments handled</span>
+      </div>
+      <div class="stat-item reveal reveal-delay-3">
+        <span class="stat-number">99.9%</span>
+        <span class="stat-label">Payment processing accuracy</span>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+      <div class="section-label">About</div>
+      <h2 class="section-title reveal">
+        Building systems that<br /><em>scale with purpose</em>
+      </h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>
+            I'm a Software Development Engineer with over three years of
+            professional experience, currently working as a Full Stack Engineer
+            at BrainSightAI in Bengaluru. My work centres on backend
+            architecture — designing systems that are not just functional, but
+            built to handle real-world scale and pressure.
+          </p>
+          <p>
+            At Maxyfi, I progressed from intern to SDE II, taking ownership of
+            critical infrastructure: payment systems processing hundreds of
+            thousands of dollars daily, communication pipelines handling
+            150,000+ messages, and a distributed service architecture that
+            dramatically reduced system load and downtime.
+          </p>
+          <p>
+            I work best at the intersection of technical rigour and product
+            thinking — collaborating closely with product managers, documenting
+            design decisions clearly, and mentoring teammates. My code ships on
+            time, scales reliably, and rarely comes back as a production
+            incident.
+          </p>
+        </div>
+        <div class="about-highlights">
+          <div class="highlight-card reveal reveal-delay-1">
+            <strong>150K+</strong>
+            <span>SMS/emails sent daily after workflow optimisation</span>
+          </div>
+          <div class="highlight-card reveal reveal-delay-2">
+            <strong>99%</strong>
+            <span>Reduction in API server downtime via CPU offloading</span>
+          </div>
+          <div class="highlight-card reveal reveal-delay-3">
+            <strong>60%</strong>
+            <span
+              >Single-server load reduction via distributed orchestration</span
+            >
+          </div>
+          <div class="highlight-card reveal reveal-delay-4">
+            <strong>25%</strong>
+            <span
+              >Sprint delivery efficiency improvement through team
+              collaboration</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- Experience -->
+    <section id="experience" class="experience-section">
+      <div class="section-label">Experience</div>
+      <h2 class="section-title reveal">
+        Where I've<br /><em>made an impact</em>
+      </h2>
+
+      <div class="experience-list">
+        <!-- BrainSightAI -->
+        <div class="exp-item reveal">
+          <div class="exp-meta">
+            <div class="exp-company">BrainSightAI</div>
+            <div class="exp-period">Mar 2026 – Present</div>
+            <div class="exp-location">Bengaluru · Hybrid</div>
+            <div class="current-badge">Current Role</div>
+          </div>
+          <div class="exp-roles">
+            <div class="exp-role">
+              <div class="exp-role-header">
+                <span class="exp-role-title">Full Stack Engineer</span>
+                <span class="exp-role-date">4 months</span>
+              </div>
+              <ul class="exp-achievements">
+                <li>
+                  Building full-stack features for an AI-powered product,
+                  contributing across backend services and frontend interfaces.
+                </li>
+                <li>
+                  Working within a hybrid team environment, delivering
+                  end-to-end engineering solutions with a focus on quality and
+                  scalability.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Maxyfi -->
+        <div class="exp-item reveal">
+          <div class="exp-meta">
+            <div class="exp-company">Maxyfi</div>
+            <div class="exp-period">Aug 2022 – Dec 2025</div>
+            <div class="exp-location">Chennai · On-site</div>
+          </div>
+          <div class="exp-roles">
+            <!-- SDE II -->
+            <div class="exp-role">
+              <div class="exp-role-header">
+                <span class="exp-role-title"
+                  >Software Development Engineer II</span
+                >
+                <span class="exp-role-date">Apr 2025 – Dec 2025</span>
+              </div>
+              <ul class="exp-achievements">
+                <li>
+                  Improved SMS and email deliverability by
+                  <strong>50%</strong> by implementing Redis-based throttling.
+                </li>
+                <li>
+                  Designed and built automated file processing, eliminating
+                  <strong>100%</strong> of manual work via SFTP batch
+                  processing.
+                </li>
+                <li>
+                  Monitored system performance with New Relic, reducing server
+                  downtime by <strong>90%</strong>.
+                </li>
+                <li>
+                  Offloaded CPU-intensive computation to slave servers, cutting
+                  API server downtime by <strong>99%</strong>.
+                </li>
+                <li>
+                  Improved sprint delivery efficiency by
+                  <strong>25%</strong> through structured communication and
+                  thorough technical documentation.
+                </li>
+              </ul>
+            </div>
+
+            <!-- SDE I -->
+            <div class="exp-role">
+              <div class="exp-role-header">
+                <span class="exp-role-title"
+                  >Software Development Engineer I</span
+                >
+                <span class="exp-role-date">May 2023 – Mar 2025</span>
+              </div>
+              <ul class="exp-achievements">
+                <li>
+                  Reduced single-server load by <strong>60%</strong> through
+                  distributed service orchestration.
+                </li>
+                <li>
+                  Improved API response time by <strong>80%</strong> via
+                  optimised MongoDB indexing and data normalisation.
+                </li>
+                <li>
+                  Built microservices for SMS, email, and templates using gRPC,
+                  RabbitMQ, and internal APIs.
+                </li>
+                <li>
+                  Scaled daily communication from
+                  <strong>1,500 to 150,000+</strong> messages using event-driven
+                  messaging queues.
+                </li>
+                <li>
+                  Mentored 2 junior developers to independently ship features
+                  and maintain code quality.
+                </li>
+                <li>
+                  Optimised payment integrations handling
+                  <strong>$100K–$500K daily</strong> with 99.9% accuracy.
+                </li>
+              </ul>
+            </div>
+
+            <!-- Intern -->
+            <div class="exp-role">
+              <div class="exp-role-header">
+                <span class="exp-role-title">Software Engineer Intern</span>
+                <span class="exp-role-date">Aug 2022 – May 2023</span>
+              </div>
+              <ul class="exp-achievements">
+                <li>
+                  Integrated Keycloak for centralised RBAC supporting
+                  <strong>1,000+ active users</strong>, replacing a monolithic
+                  auth system.
+                </li>
+                <li>
+                  Reduced authentication failures and maintenance effort by
+                  approximately <strong>70%</strong>.
+                </li>
+                <li>
+                  Integrated payment gateways (Stripe, AcceptBlue), accounting
+                  platforms (ZohoBooks, Xero), and Twilio.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+      <div class="section-label">Technical Skills</div>
+      <h2 class="section-title reveal">
+        A toolkit built for<br /><em>production environments</em>
+      </h2>
+      <div class="skills-grid">
+        <div class="skill-category reveal">
+          <div class="skill-cat-title">Backend & Architecture</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">Express.js</span>
+            <span class="skill-tag">Microservices</span>
+            <span class="skill-tag">gRPC</span>
+            <span class="skill-tag">RabbitMQ</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">Redis</span>
+            <span class="skill-tag">SFTP Batch</span>
+          </div>
+        </div>
+        <div class="skill-category reveal reveal-delay-1">
+          <div class="skill-cat-title">Database & Storage</div>
+          <div class="skill-tags">
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">Database Design</span>
+            <span class="skill-tag">Indexing</span>
+            <span class="skill-tag">Data Normalisation</span>
+            <span class="skill-tag">Amazon S3</span>
+            <span class="skill-tag">SES</span>
+          </div>
+        </div>
+        <div class="skill-category reveal reveal-delay-2">
+          <div class="skill-cat-title">Frontend</div>
+          <div class="skill-tags">
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">Redux.js</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">Electron.js</span>
+            <span class="skill-tag">EJS</span>
+          </div>
+        </div>
+        <div class="skill-category reveal">
+          <div class="skill-cat-title">DevOps & Monitoring</div>
+          <div class="skill-tags">
+            <span class="skill-tag">New Relic</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Performance Tuning</span>
+            <span class="skill-tag">Systems Design</span>
+            <span class="skill-tag">Debugging</span>
+          </div>
+        </div>
+        <div class="skill-category reveal reveal-delay-1">
+          <div class="skill-cat-title">Integrations & Auth</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Keycloak</span>
+            <span class="skill-tag">OAuth</span>
+            <span class="skill-tag">Stripe</span>
+            <span class="skill-tag">AcceptBlue</span>
+            <span class="skill-tag">Twilio</span>
+            <span class="skill-tag">ZohoBooks</span>
+            <span class="skill-tag">Xero</span>
+          </div>
+        </div>
+        <div class="skill-category reveal reveal-delay-2">
+          <div class="skill-cat-title">Testing & Tooling</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Mocha</span>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">Sourcetree</span>
+            <span class="skill-tag">PuTTY</span>
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">API Testing</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-sep"></div>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials-section">
+      <div class="section-label">Recommendations</div>
+      <h2 class="section-title reveal">
+        What colleagues<br /><em>say about working with me</em>
+      </h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <p class="testimonial-text">
+            I've had the pleasure of managing Rajan for 2+ years, and he is one
+            of the most proactive developers I've worked with. He took ownership
+            and was always the first to volunteer for challenging tasks. His
+            ability to work independently while staying aligned with team goals
+            made him a go-to person on our most critical tasks. I highly
+            recommend him for his technical skills.
+          </p>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Abdullah P B</span>
+            <span class="testimonial-title"
+              >Engineering Lead · Maxyfi<br />Direct manager, January 2026</span
+            >
+          </div>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <p class="testimonial-text">
+            Sri joined Maxyfi as a full-time intern during his final year and
+            immediately impressed us with his energy and drive to learn. He
+            quickly transitioned into a capable SDE 1, taking ownership of
+            complex payment modules and stepping up to handle DevOps and support
+            challenges when needed. Beyond his technical skills, Sri is the kind
+            of person you can always rely on in a pinch. He has been a true
+            asset to our team.
+          </p>
+          <div class="testimonial-author">
+            <span class="testimonial-name">Joshy Varoky Francis</span>
+            <span class="testimonial-title"
+              >Director · Award-Winning Collection Platform<br />Direct manager,
+              January 2026</span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Certs -->
+    <section id="education">
+      <div class="section-label">Education & Certifications</div>
+      <h2 class="section-title reveal">Academic<br /><em>foundation</em></h2>
+      <div class="edu-certs-grid">
+        <div class="reveal">
+          <div class="edu-item">
+            <div class="edu-degree">B.Sc. Computer Programming</div>
+            <div class="edu-school">The New College, Chennai</div>
+            <div class="edu-year">2020 – 2023</div>
+          </div>
+          <div
+            style="
+              margin-top: 1.5rem;
+              padding: 1.25rem;
+              background: var(--bg-card);
+              border: 1px solid var(--border);
+            "
+          >
+            <div
+              style="
+                font-size: 0.72rem;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                margin-bottom: 0.75rem;
+              "
+            >
+              Community
+            </div>
+            <div
+              style="
+                font-size: 0.9rem;
+                color: var(--text-secondary);
+                font-weight: 300;
+              "
+            >
+              Volunteer, Care & Welfare Foundation<br /><span
+                style="font-size: 0.75rem; color: var(--text-muted)"
+                >Jun 2023 – Present · Social Services</span
+              >
+            </div>
+          </div>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <div
+            style="
+              font-size: 0.72rem;
+              letter-spacing: 0.12em;
+              text-transform: uppercase;
+              color: var(--gold);
+              margin-bottom: 1rem;
+            "
+          >
+            Certifications
+          </div>
+          <div class="cert-list">
+            <div class="cert-item">
+              <div class="cert-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </div>
+              <div class="cert-info">
+                <div class="cert-name">SQL Programming</div>
+                <div class="cert-issuer">LinkedIn Learning</div>
+              </div>
+              <div class="cert-year">2022</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </div>
+              <div class="cert-info">
+                <div class="cert-name">Become a Software Developer</div>
+                <div class="cert-issuer">LinkedIn Learning</div>
+              </div>
+              <div class="cert-year">2022</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </div>
+              <div class="cert-info">
+                <div class="cert-name">Python — LinkedIn Skill Assessment</div>
+                <div class="cert-issuer">LinkedIn</div>
+              </div>
+              <div class="cert-year">Passed</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </div>
+              <div class="cert-info">
+                <div class="cert-name">
+                  JavaScript — LinkedIn Skill Assessment
+                </div>
+                <div class="cert-issuer">LinkedIn</div>
+              </div>
+              <div class="cert-year">Passed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact-section">
+      <div
+        class="section-label"
+        style="justify-content: center; text-align: center"
+      >
+        Contact
+      </div>
+      <h2 class="contact-title reveal">
+        Let's build something<br /><em>remarkable together</em>
+      </h2>
+      <p class="contact-tagline reveal reveal-delay-1">
+        Open to engineering roles, consulting engagements, and conversations
+        about scalable backend systems.
+      </p>
+      <div class="contact-links reveal reveal-delay-2">
+        <a
+          href="https://www.linkedin.com/in/sri-rajan-bb1442215/"
+          target="_blank"
+          class="contact-link"
+        >
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+            />
+          </svg>
+          LinkedIn Profile
+        </a>
+        <a href="mailto:srirajan@example.com" class="contact-link">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+            />
+          </svg>
+          Send Email
+        </a>
+        <a
+          href="https://www.linkedin.com/in/sri-rajan-bb1442215/"
+          target="_blank"
+          class="contact-link"
+        >
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+            />
+          </svg>
+          GitHub
+        </a>
+      </div>
+      <a
+        href="https://www.linkedin.com/in/sri-rajan-bb1442215/"
+        target="_blank"
+        class="btn-primary"
+        style="font-size: 0.8rem; padding: 1rem 2.5rem"
+      >
+        View Full Profile
+      </a>
+    </section>
+
+    <footer>
+      <span class="footer-copy">© 2026 Sri Rajan. All rights reserved.</span>
+      <span class="footer-logo">Sri <span>Rajan</span></span>
+      <span class="footer-copy">Chennai · Bengaluru · India</span>
+    </footer>
+
+    <script>
+      // Scroll reveal
+      const reveals = document.querySelectorAll(".reveal");
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12, rootMargin: "0px 0px -40px 0px" },
+      );
+
+      reveals.forEach((el) => observer.observe(el));
+
+      // Hero elements immediately visible
+      document.querySelectorAll(".hero .reveal").forEach((el) => {
+        el.classList.add("visible");
+      });
+
+      // Nav scroll effect
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        if (window.scrollY > 60) {
+          nav.style.borderBottomColor = "rgba(200,160,80,0.1)";
+        } else {
+          nav.style.borderBottomColor = "rgba(255,255,255,0.07)";
+        }
+      });
+    </script>
+  </body>
+</html>
